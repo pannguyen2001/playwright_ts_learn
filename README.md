@@ -1,7 +1,8 @@
-# Node + Express Service Starter
+# Learn playwright ts
 
-This is a simple hello world express.js server.
+npx playwright test
+allure generate ./allure-results -o ./allure-report
+allure open ./allure-report
 
-## Getting Started
-
-Previews should run automatically when starting a workspace. Run the `Show Web Preview` IDX command to see the preview.
+Source learning:
+[][][] https://anhtester.com/lesson/playwright-typescript-bai-21-ky-thuat-debug-loi-voi-trace-viewer-va-cau-hinh-reporting-tu-co-ban-html-den-nang-cao-allure-custom

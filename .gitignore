@@ -1,0 +1,5 @@
+.env
+.idx/
+node_modules/
+GEMINI.md
+dist/
