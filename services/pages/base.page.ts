@@ -1,4 +1,5 @@
-import {type Page, type Locator } from '@playwright/test';
+import {type Page, type Locator, expect } from '@playwright/test';
+import { BASE_URL, timestamp } from '@/configs/constants';
 
 export abstract class BasePage {
   readonly page: Page;
@@ -8,8 +9,8 @@ export abstract class BasePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.userMenu = page.locator('button[aria-label="User Menu"]');
-    this.logoutBtn =  page.locator('a[href="/logout"]');
+    // this.userMenu = page.getByRole('button', { name: 'Test Employee admin_example' });
+    this.logoutBtn = page.getByRole('link', { name: ' Logout' });
   }
 
   async goto(url: string) {
@@ -24,11 +25,11 @@ export abstract class BasePage {
     await this.page.reload();
   }
   async screenshot(name: string) {
-    await this.page.screenshot({ path: `./screenshots/${name}.png` });
+    await this.page.screenshot({ path: `./screenshots/${timestamp()}_${name}.png` });
   }
 
   async reocordVideo(name: string) {
-    await this.page.video().saveAs(`./videos/${name}.webm`);
+    await this.page.video().saveAs(`./videos/${timestamp()}_${name}.webm`);
   }
   async waitForSelector(selector: string) {
     await this.page.waitForSelector(selector);
@@ -39,7 +40,7 @@ export abstract class BasePage {
   }
 
   async logout() {
-    await this.userMenu.click();
+    // await this.userMenu.click();
     await this.logoutBtn.click();
   }
 }

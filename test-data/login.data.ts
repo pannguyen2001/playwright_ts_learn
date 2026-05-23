@@ -1,4 +1,4 @@
-import { BASE_URL, DASHBOARD_URL, USER_NAME, PASSWORD } from "../utils/constants";
+import { BASE_URL, DASHBOARD_URL, USER_NAME, PASSWORD } from "../configs/constants";
 export interface LoginTestData {
     title: string;
     username: string;

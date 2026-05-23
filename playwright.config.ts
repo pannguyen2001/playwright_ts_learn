@@ -28,7 +28,7 @@ export default defineConfig({
     ['html'], // Xem debug nhanh
     
     // 👇 Cấu hình Allure ở đây
-    ['allure-playwright'],
+    ['allure-playwright', { resultsDir: 'allure-results' }],
      ['C:\\_My_job\\_Code\\_try_playwright_ts\\reporters\\my-reporter.ts']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -38,6 +38,9 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    storageState: undefined, // no shared state
   },
 
   /* Configure projects for major browsers */
