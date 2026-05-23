@@ -29,7 +29,7 @@ export default defineConfig({
     
     // 👇 Cấu hình Allure ở đây
     ['allure-playwright', { resultsDir: 'allure-results' }],
-     ['C:\\_My_job\\_Code\\_try_playwright_ts\\reporters\\my-reporter.ts']
+     ['C:\\Users\\ASUS\\Code\\playwright_ts_learn\\reporters\\my-reporter.ts']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
