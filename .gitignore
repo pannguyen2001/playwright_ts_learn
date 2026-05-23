@@ -22,3 +22,6 @@ allure-report/
 allure-results/
 package-lock.json
 package.json
+.vscode/
+*.yaml
+.gitignore
