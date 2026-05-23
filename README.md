@@ -3,7 +3,7 @@
 npx playwright test
 or pnpm exec playwright test
 
-allure generate ./allure-results -o ./allure-report
+allure generate ./allure-results -o ./allure-report --clean
 
 allure open ./allure-report
 

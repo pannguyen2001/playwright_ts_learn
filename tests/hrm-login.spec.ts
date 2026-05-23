@@ -75,7 +75,7 @@ test.describe(`${loginMetaData.description} - POSITIVE`, () => {
       // Create page and component for test
       const loginPage = new LoginPage(page);
       const toast = new ToastComponent(page);
-      await loginPage.goto(BASE_URL);
+      await loginPage.goto(BASE_URL!);
 
 
       // ---------- Act ----------

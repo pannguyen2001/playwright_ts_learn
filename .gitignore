@@ -12,3 +12,13 @@ screenshots/
 .env
 dist/
 
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+allure-report/
+allure-results/
+package-lock.json
+package.json
