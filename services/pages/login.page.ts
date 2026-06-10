@@ -3,48 +3,59 @@ import { type Page, type Locator, expect } from "@playwright/test";
 import logger from "@/utils/log4js";
 import { BasePage } from "@/services/pages/base.page";
 
+// import { createLogger } from "@/utils/logger";
+import { createLogger } from "@/utils/log4js";
+
+const log = createLogger("LoginPage");
+
 export class LoginPage extends BasePage {
-    readonly usernameInput: Locator;
-    readonly passwordInput: Locator;
-    readonly loginButton: Locator;
+	readonly usernameInput: Locator;
+	readonly passwordInput: Locator;
+	readonly loginButton: Locator;
 
-    constructor(page: Page) {
-        super(page);
-        this.usernameInput = page.getByRole('textbox', { name: 'Your Username' })
-        // page.locator('input[name="iusername"]'); // Adjust selectors
-        this.passwordInput = page.getByRole('textbox', { name: 'Enter Password' })
-        // page.locator('input[name="password"]');
-        this.loginButton = page.getByRole('button', { name: /Login/i }).first()
-        // page.locator('button[type="submit"]');
-    }
+	constructor(page: Page, browserName: string, testcaseName: string) {
+		super(page, browserName, testcaseName);
+		this.usernameInput = page.getByRole("textbox", { name: "Your Username" });
+		// page.locator('input[name="iusername"]'); // Adjust selectors
+		this.passwordInput = page.getByRole("textbox", { name: "Enter Password" });
+		// page.locator('input[name="password"]');
+		this.loginButton = page.getByRole("button", { name: /Login/i }).first();
+		// page.locator('button[type="submit"]');
+	}
 
-    // Navigation
-    async goto(url: string): Promise<void> {
-        await this.page.goto(url);
-    }
+	// Navigation
+	async goto(url: string): Promise<void> {
+		log.info(
+			`[${this.browserName}][${this.testcaseName}] Navigating to ${url}`,
+		);
+		await this.page.goto(url);
+	}
 
-    // Actions
-    async fillUsername(username: string): Promise<void> {
-        await this.usernameInput.fill(username);
-    }
+	// Actions
+	async fillUsername(username: string): Promise<void> {
+		await this.usernameInput.fill(username);
+	}
 
-    async fillPassword(password: string): Promise<void> {
-        await this.passwordInput.fill(password);
-    }
+	async fillPassword(password: string): Promise<void> {
+		await this.passwordInput.fill(password);
+	}
 
-    async clickLogin(): Promise<void> {
-        await this.loginButton.click();
-    }
+	async clickLogin(): Promise<void> {
+		await this.loginButton.click();
+	}
 
-    // Compound Actions
-    async login(username: string, password: string): Promise<void> {
-        await this.fillUsername(username);
-        await this.fillPassword(password);
-        await this.clickLogin()
-    }
+	// Compound Actions
+	async login(username: string, password: string): Promise<void> {
+		// Don't log the actual password — mask it
+		log.info(
+			`[${this.browserName}][${this.testcaseName}] Logging in as "${username || "<empty>"}" / "${password ? "***" : "<empty>"}"`,
+		);
+		await this.fillUsername(username);
+		await this.fillPassword(password);
+		await this.clickLogin();
+	}
 
-
-    async expectUrl(url: string): Promise<void> {
-        await expect.soft(this.page).toHaveURL(url)
-    }
+	async expectUrl(url: string): Promise<void> {
+		await expect.soft(this.page).toHaveURL(url);
+	}
 }

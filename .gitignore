@@ -6,20 +6,9 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-logs/
-videos/
-screenshots/
-.env
+__pycache__
 dist/
-
-# Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
-allure-report/
-allure-results/
+*.env
 package-lock.json
 package.json
 .vscode/
