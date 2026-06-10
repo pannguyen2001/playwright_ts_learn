@@ -1,12 +1,11 @@
 {
-  "name": "node-express-web-ts",
+  "name": "_try_playwright_ts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch --ext 'ts,json' --exec 'npm run build && npm run start'",
-    "build": "tsc && cp -r views dist",
-    "start": "node dist/index.js"
+    "start": "tsx && tsc-clear videos screenshots test-results",
+    "test": "rm -rf test-results videos screenshots && npx playwright test"
   },
   "keywords": [],
   "author": "",
@@ -20,9 +19,22 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.10.0",
-    "nodemon": "^3.0.1",
-    "typescript": "^5.3.2"
+    "@types/node": "^25.0.7",
+    "allure-commandline": "^2.41.0",
+    "allure-js-commons": "^3.4.4",
+    "allure-playwright": "^3.8.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "log4js": "^6.9.1",
+    "module-alias": "^2.3.4",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.6.2",
+    "pnpm": "^11.1.2",
+    "tsc-clear": "^1.0.9",
+    "tsx": "^4.22.1"
   }
 }
