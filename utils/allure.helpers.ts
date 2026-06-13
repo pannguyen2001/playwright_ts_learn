@@ -23,20 +23,23 @@ import { PROJECT_NAME } from "@/configs/constants";
 import logger from "@/utils/log4js";
 import { CommonTestCase } from "@/types/testcase.type";
 
+export function setMetadata(
+  metadata: TestMetadata,
+  testInfo: CommonTestCase,
+  index: number,
+) {
+  testInfo.testId = `TC-${testInfo.testCaseType}-${metadata.feature.join("_")}-${metadata.page}-${index.toString().padStart(2, "0")}`;
+  const projectName: string | undefined = metadata.projectName ?? PROJECT_NAME;
+  const description: string = metadata.description ?? "";
+  const owner: string | undefined = metadata.owner ?? OWNER;
+  const feature = metadata.feature.join("_");
 
-export function setMetadata(metadata: TestMetadata, testInfo: CommonTestCase, index: number) {
-    testInfo.testId = `TC-${testInfo.testCaseType}-${metadata.feature.join("_")}-${metadata.page}-${index.toString().padStart(2, '0')}`;
-    const projectName: string = metadata.projectName ?? PROJECT_NAME;
-    const description: string = metadata.description ?? "";
-    const owner: string = metadata.owner ?? OWNER;
-    const feature = metadata.feature.join("_")
-
-    // Setup allure report
-    allure.allureId(testInfo.testId);
-    allure.suite(projectName);
-    allure.epic(testInfo.testName);
-    allure.feature(feature);
-    allure.severity(testInfo.priority);
-    allure.owner(owner);
-    allure.description(description);
+  // Setup allure report
+  allure.allureId(testInfo.testId);
+  allure.suite(projectName!);
+  allure.epic(testInfo.testName);
+  allure.feature(feature);
+  allure.severity(testInfo.priority);
+  allure.owner(owner!);
+  allure.description(description);
 }
