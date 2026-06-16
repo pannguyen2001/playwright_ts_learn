@@ -1,4 +1,4 @@
-import { type Page, type Locator, expect } from "@playwright/test";
+import { type Page, type Locator, expect, TestInfo } from "@playwright/test";
 import { BASE_URL, timestamp } from "@/configs/constants";
 
 // import { createLogger } from "@/utils/logger";
@@ -7,27 +7,24 @@ import { createLogger } from "@/utils/log4js";
 const log = createLogger("LoginPage");
 
 export abstract class BasePage {
-	readonly browserName: string;
-	readonly testcaseName: string;
 	readonly page: Page;
 	readonly url: string;
 	readonly userMenu: Locator;
 	readonly logoutBtn: Locator;
+	readonly testInfo: TestInfo;
 
-	constructor(page: Page, browserName: string, testcaseName: string) {
+	constructor(page: Page, testInfo?: TestInfo) {
 		this.page = page;
-		this.browserName = browserName;
-		this.testcaseName = testcaseName;
+		this.testInfo = testInfo;
 		// this.userMenu = page.getByRole('button', { name: 'Test Employee admin_example' });
 		this.logoutBtn = page.getByRole("link", { name: " Logout" });
 	}
 
-	async goto(url: string) {
+	async goto(url: string): Promise<void> {
+		log.info(
+			`[${this.testInfo?.testId}][${this.testInfo?.project?.name}][${this.testInfo?.title}] Navigating to ${url}`,
+		);
 		await this.page.goto(url);
-	}
-
-	async close() {
-		await this.page.close();
 	}
 
 	async reload() {
@@ -54,6 +51,12 @@ export abstract class BasePage {
 		// log.step("Logging out");
 		// await this.userMenu.click();
 		await this.logoutBtn.click();
-		log.info(`[${this.browserName}][${this.testcaseName}] Logout complete`);
+		log.info(
+			`[${this.testInfo?.testId}][${this.testInfo?.project?.name}][${this.testInfo?.title}] Logout complete`,
+		);
+	}
+
+	async expectUrl(url: string): Promise<void> {
+		await expect.soft(this.page).toHaveURL(url);
 	}
 }

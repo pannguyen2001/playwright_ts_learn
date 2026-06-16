@@ -4,7 +4,7 @@
 //   - `test`   → Playwright's test() with your fixtures injected
 //   - `expect` → Playwright's expect (re-exported from the fixture)
 //
-import { test, expect } from "@/fixtures/login.fixture";
+import { test, expect } from "@/fixtures/index";
 
 import { BASE_URL, PROJECT_NAME, OWNER } from "@/configs/constants";
 import { setMetadata } from "@/utils/allure.helpers";
@@ -49,6 +49,7 @@ async function clearFolder(directory: string) {
 test.describe(`${loginMetaData.description} - POSITIVE`, () => {
 	// ─── beforeAll: folder cleanup ──────────────────────────────────────────────
 	// This stays the same — it's not fixture territory (no page/browser needed).
+	test.use({ storageState: undefined });
 	test.beforeAll(async () => {
 		await clearFolder("./videos");
 		await clearFolder("./screenshots");
@@ -57,22 +58,26 @@ test.describe(`${loginMetaData.description} - POSITIVE`, () => {
 	positiveLoginTestCases.forEach((testCase: LoginTestCase, index: number) => {
 		test(
 			testCase.testName,
-			async ({
-				// ── Destructure your fixtures ──────────────────────────────────────────
-				//
-				// Playwright reads these parameter names and matches them to the fixture
-				// definitions in login.fixture.ts. No manual instantiation needed.
-				//
-				loginPage, // ← LoginPage POM, already constructed with an isolated page
-				toast, // ← ToastComponent, already constructed
-				goToLogin, // ← async function () => loginPage.goto(BASE_URL)
-				browserName, // ← built-in Playwright fixture (string: "chromium" | "firefox" | "webkit")
-			}) => {
+			async (
+				{
+					// ── Destructure your fixtures ──────────────────────────────────────────
+					//
+					// Playwright reads these parameter names and matches them to the fixture
+					// definitions in login.fixture.ts. No manual instantiation needed.
+					//
+					loginPage, // ← LoginPage POM, already constructed with an isolated page
+					toast, // ← ToastComponent, already constructed
+					goToLogin, // ← async function () => loginPage.goto(BASE_URL)
+					browserName, // ← built-in Playwright fixture (string: "chromium" | "firefox" | "webkit")
+				},
+				TestInfo,
+			) => {
 				// ── Arrange ─────────────────────────────────────────────────────────────
 				//
 				// setMetadata is still a plain helper call — not fixture territory.
 				setMetadata(loginMetaData, testCase, index);
-				log.info(`Starting test: "${testCase.testName}" - "${browserName}"`);
+				let testcaseLogInfo: string = `${TestInfo.testId} - ${TestInfo.project.name} - ${testCase.testName}`;
+				log.info(`Starting test: ${testcaseLogInfo}`);
 
 				// goToLogin is the fixture function we defined. Calling it navigates to BASE_URL.
 				// This replaces: await loginPage.goto(BASE_URL)
@@ -107,7 +112,7 @@ test.describe(`${loginMetaData.description} - POSITIVE`, () => {
 					await toast.assertMessage(testCase.expectedResult.toast);
 				}
 
-				log.info(`Test passed: "${testCase.testName}" - "${browserName}"`);
+				log.info(`Test completed: ${testcaseLogInfo}`);
 
 				// ── No manual context.close() needed ─────────────────────────────────────
 				// The `isolatedPage` fixture teardown handles it automatically after `use()`.
