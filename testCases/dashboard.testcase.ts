@@ -1,4 +1,4 @@
-import { BASE_URL, PASSWORD, USER_NAME } from "@/configs/constants";
+import { DASHBOARD_URL, PASSWORD, USER_NAME } from "@/configs/constants";
 import { DashboardTestCase } from "@/types/testcase.type";
 
 // Should isolate positive case and negative case
@@ -12,7 +12,7 @@ export const positiveDasboardTestCases: DashboardTestCase[] = [
 		isAllBrowser: true,
 		testCaseType: "POSITIVE",
 		expectedResult: {
-			url: `${BASE_URL}/erp/desk?module=dashboard`,
+			url: `${DASHBOARD_URL}`,
 		},
 	},
 ];

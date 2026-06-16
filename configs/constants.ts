@@ -7,7 +7,7 @@ loadEnvFile();
 const BASE_URL: string | undefined = process.env.BASE_URL;
 const USER_NAME: string | undefined = process.env.USER_NAME;
 const PASSWORD: string | undefined = process.env.PASSWORD;
-const DASHBOARD_URL: string | undefined = `${BASE_URL}/erp/desk`;
+const DASHBOARD_URL: string | undefined = `${BASE_URL}/erp/desk?module=dashboard`;
 const LOG_FOLDER_PATH: string | undefined = process.env.LOG_FOLDER_PATH;
 const DATE_TIME_FORMAT: string = "YYYY-MM-DD HH:mm:ss";
 const DATE_FORMAT: string = "YYYY-MM-DD";
