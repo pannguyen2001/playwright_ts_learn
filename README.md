@@ -15,7 +15,7 @@ Source learning:
 
 [][][] https://anhtester.com/lesson/playwright-typescript-bai-21-ky-thuat-debug-loi-voi-trace-viewer-va-cau-hinh-reporting-tu-co-ban-html-den-nang-cao-allure-custom
 
-
+```
 alias path ts:
 tsconfig.json:
 {
@@ -48,5 +48,6 @@ tsconfig.json:
   "exclude": ["node_modules", "build"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
+```
 
 ctrl + shift + p -> Typescript: Restart TS Server

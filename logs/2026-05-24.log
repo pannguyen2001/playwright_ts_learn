@@ -1,0 +1,16 @@
+[INFO][2026-05-24 02:25:36][index.ts:logger:3]
+Hello
+[DEBUG][2026-05-24 02:25:36][index.ts:logger:4]
+Debug
+[ERROR][2026-05-24 02:25:36][index.ts:logger:5]
+Error
+[INFO][2026-05-24 02:26:40][index.ts:logger:3]
+Hello
+[DEBUG][2026-05-24 02:26:40][index.ts:logger:4]
+Debug
+[ERROR][2026-05-24 02:26:40][index.ts:logger:5]
+Error
+[WARN][2026-05-24 02:26:40][index.ts:logger:6]
+Warning
+[FATAL][2026-05-24 02:26:40][index.ts:logger:8]
+Fatal
