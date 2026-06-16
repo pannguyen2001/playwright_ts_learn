@@ -1,5 +1,5 @@
 // src/services/pages/login.page.ts
-import { type Page, type Locator, expect } from "@playwright/test";
+import { type Page, type Locator, expect, TestInfo } from "@playwright/test";
 import logger from "@/utils/log4js";
 import { BasePage } from "@/services/pages/base.page";
 
@@ -13,22 +13,14 @@ export class LoginPage extends BasePage {
 	readonly passwordInput: Locator;
 	readonly loginButton: Locator;
 
-	constructor(page: Page, browserName: string, testcaseName: string) {
-		super(page, browserName, testcaseName);
+	constructor(page: Page, testInfo?: TestInfo) {
+		super(page, testInfo);
 		this.usernameInput = page.getByRole("textbox", { name: "Your Username" });
 		// page.locator('input[name="iusername"]'); // Adjust selectors
 		this.passwordInput = page.getByRole("textbox", { name: "Enter Password" });
 		// page.locator('input[name="password"]');
 		this.loginButton = page.getByRole("button", { name: /Login/i }).first();
 		// page.locator('button[type="submit"]');
-	}
-
-	// Navigation
-	async goto(url: string): Promise<void> {
-		log.info(
-			`[${this.browserName}][${this.testcaseName}] Navigating to ${url}`,
-		);
-		await this.page.goto(url);
 	}
 
 	// Actions
@@ -48,14 +40,10 @@ export class LoginPage extends BasePage {
 	async login(username: string, password: string): Promise<void> {
 		// Don't log the actual password — mask it
 		log.info(
-			`[${this.browserName}][${this.testcaseName}] Logging in as "${username || "<empty>"}" / "${password ? "***" : "<empty>"}"`,
+			`[${this.testInfo?.testId}][${this.testInfo?.project?.name}][${this.testInfo?.title}] Logging in as "${username || "<empty>"}" / "${password ? "***" : "<empty>"}"`,
 		);
 		await this.fillUsername(username);
 		await this.fillPassword(password);
 		await this.clickLogin();
-	}
-
-	async expectUrl(url: string): Promise<void> {
-		await expect.soft(this.page).toHaveURL(url);
 	}
 }

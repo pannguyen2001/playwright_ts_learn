@@ -14,7 +14,9 @@ const logFolderPath = LOG_FOLDER_PATH || "logs";
 if (!fs.existsSync(logFolderPath))
 	fs.mkdirSync(logFolderPath, { recursive: true });
 
-const logFileName = `${logFolderPath}/${now}.log`;
+const worker = process.env.TEST_WORKER_INDEX ?? "0";
+
+const logFileName = `${logFolderPath}/${now}_worker-${worker}.log`;
 
 log4js.configure({
 	appenders: {
@@ -53,5 +55,5 @@ export default logger;
 
 /** Factory — each file/class gets its own named logger */
 export function createLogger(context: string): Logger {
-	return log4js.getLogger();
+	return log4js.getLogger(context);
 }
