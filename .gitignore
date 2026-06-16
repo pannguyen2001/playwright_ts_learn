@@ -11,3 +11,6 @@ package.json
 .idx
 allure-report
 allure-results
+node_modules
+test-results
+playwright-report

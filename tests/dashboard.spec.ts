@@ -1,6 +1,6 @@
 import { test, expect } from "@/fixtures/index";
 
-import { BASE_URL, PROJECT_NAME, OWNER } from "@/configs/constants";
+import { BASE_URL, PROJECT_NAME, OWNER, DASHBOARD_URL } from "@/configs/constants";
 import { setMetadata } from "@/utils/allure.helpers";
 import { DashboardTestCase } from "@/types/testcase.type";
 import { positiveDasboardTestCases } from "@/testCases/dashboard.testcase";
@@ -59,7 +59,7 @@ test.describe(`${METADATA.description} - POSITIVE`, () => {
 
 					// goToLogin is the fixture function we defined. Calling it navigates to BASE_URL.
 					// This replaces: await loginPage.goto(BASE_URL)
-					await dashboardPage.goto(BASE_URL);
+					await dashboardPage.goto(DASHBOARD_URL!);
 
 					await dashboardPage.expectUrl(testCase.expectedResult.url);
 
