@@ -10,13 +10,13 @@ import * as fs from "fs";
 
 const now = moment(new Date()).format(DATE_FORMAT);
 
-const logFolderPath = LOG_FOLDER_PATH || "logs";
+const logFolderPath = `${LOG_FOLDER_PATH ?? "logs"}/${now}`;
 if (!fs.existsSync(logFolderPath))
 	fs.mkdirSync(logFolderPath, { recursive: true });
 
 const worker = process.env.TEST_WORKER_INDEX ?? "0";
 
-const logFileName = `${logFolderPath}/${now}_worker-${worker}.log`;
+const logFileName = `${logFolderPath}/worker-${worker}.log`;
 
 log4js.configure({
 	appenders: {
