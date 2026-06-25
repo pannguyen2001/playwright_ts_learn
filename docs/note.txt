@@ -1,1 +1,2 @@
- npx playwright test  --trace on --workers=4 --retries=2 --repeat-each=5
+npx playwright test  --trace on --workers=4 --retries=2 --repeat-each=5
+

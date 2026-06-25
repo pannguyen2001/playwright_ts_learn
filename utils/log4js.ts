@@ -10,7 +10,7 @@ import * as fs from "fs";
 
 const now = moment(new Date()).format(DATE_FORMAT);
 
-const logFolderPath = LOG_FOLDER_PATH || "logs";
+const logFolderPath = `${LOG_FOLDER_PATH ?? "logs"}/${now}`;
 if (!fs.existsSync(logFolderPath))
   fs.mkdirSync(logFolderPath, { recursive: true });
 
