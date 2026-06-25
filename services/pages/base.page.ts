@@ -7,56 +7,56 @@ import { createLogger } from "@/utils/log4js";
 const log = createLogger("LoginPage");
 
 export abstract class BasePage {
-	readonly page: Page;
-	readonly url: string;
-	readonly userMenu: Locator;
-	readonly logoutBtn: Locator;
-	readonly testInfo: TestInfo;
+  readonly page: Page;
+  readonly url: string;
+  readonly userMenu: Locator;
+  readonly logoutBtn: Locator;
+  readonly testInfo: TestInfo;
 
-	constructor(page: Page, testInfo?: TestInfo) {
-		this.page = page;
-		this.testInfo = testInfo;
-		// this.userMenu = page.getByRole('button', { name: 'Test Employee admin_example' });
-		this.logoutBtn = page.getByRole("link", { name: " Logout" });
-	}
+  constructor(page: Page, testInfo?: TestInfo) {
+    this.page = page;
+    this.testInfo = testInfo;
+    // this.userMenu = page.getByRole('button', { name: 'Test Employee admin_example' });
+    this.logoutBtn = page.getByRole("link", { name: " Logout" });
+  }
 
-	async goto(url: string): Promise<void> {
-		log.info(
-			`[${this.testInfo?.testId}][${this.testInfo?.project?.name}][${this.testInfo?.title}] Navigating to ${url}`,
-		);
-		await this.page.goto(url);
-	}
+  async goto(url: string): Promise<void> {
+    log.info(
+      `[${this.testInfo?.testId}][${this.testInfo?.project?.name}][${this.testInfo?.title}] Navigating to ${url}`,
+    );
+    await this.page.goto(url);
+  }
 
-	async reload() {
-		await this.page.reload();
-	}
-	async screenshot(name: string) {
-		await this.page.screenshot({
-			path: `./screenshots/${timestamp()}_${name}.png`,
-		});
-	}
+  async reload() {
+    await this.page.reload();
+  }
+  async screenshot(name: string) {
+    await this.page.screenshot({
+      path: `./screenshots/${timestamp()}_${name}.png`,
+    });
+  }
 
-	async reocordVideo(name: string) {
-		await this.page.video().saveAs(`./videos/${timestamp()}_${name}.webm`);
-	}
-	async waitForSelector(selector: string) {
-		await this.page.waitForSelector(selector);
-	}
+  async reocordVideo(name: string) {
+    await this.page.video().saveAs(`./videos/${timestamp()}_${name}.webm`);
+  }
+  async waitForSelector(selector: string) {
+    await this.page.waitForSelector(selector);
+  }
 
-	async waitForTimeout(timeout: number) {
-		await this.page.waitForTimeout(timeout);
-	}
+  async waitForTimeout() {
+    await this.page.waitForLoadState();
+  }
 
-	async logout() {
-		// log.step("Logging out");
-		// await this.userMenu.click();
-		await this.logoutBtn.click();
-		log.info(
-			`[${this.testInfo?.testId}][${this.testInfo?.project?.name}][${this.testInfo?.title}] Logout complete`,
-		);
-	}
+  async logout() {
+    // log.step("Logging out");
+    // await this.userMenu.click();
+    await this.logoutBtn.click();
+    log.info(
+      `[${this.testInfo?.testId}][${this.testInfo?.project?.name}][${this.testInfo?.title}] Logout complete`,
+    );
+  }
 
-	async expectUrl(url: string): Promise<void> {
-		await expect.soft(this.page).toHaveURL(url);
-	}
+  async expectUrl(url: string): Promise<void> {
+    await expect.soft(this.page).toHaveURL(url);
+  }
 }
