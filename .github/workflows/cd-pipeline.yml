@@ -9,7 +9,7 @@ on:
 
 env:
   PORT: 5001
-  IMAGE: ${{vars.IMAGE}}:${{github.sha}}
+  IMAGE: pannguyen2001/playwright-ts-learn:${{github.sha}}
 jobs:
   test:
     runs-on: ubuntu-latest
