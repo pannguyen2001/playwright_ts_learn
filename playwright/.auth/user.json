@@ -6,5 +6,11 @@
 	"admin": {
 		"username": "admin_example",
 		"password": "123456"
+	},
+	"datn_admin": {
+		"username": "test_user_01",
+		"email": "test_user_01@gmail.com",
+		"password": "123456789",
+		"role": "admin"
 	}
 }
