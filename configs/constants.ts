@@ -4,15 +4,15 @@ const { loadEnvFile } = require("node:process");
 // Loads environment variables from the default .env file
 loadEnvFile();
 
-const BASE_URL: string | undefined = process.env.BASE_URL;
-const USER_NAME: string | undefined = process.env.USER_NAME;
-const PASSWORD: string | undefined = process.env.PASSWORD;
-const DASHBOARD_URL: string | undefined = `${BASE_URL}/erp/desk?module=dashboard`;
-const LOG_FOLDER_PATH: string | undefined = process.env.LOG_FOLDER_PATH;
+const BASE_URL: string = process.env.BASE_URL ?? "http://localhost:3000";
+const USER_NAME: string = process.env.USER_NAME ?? "";
+const PASSWORD: string = process.env.PASSWORD ?? "";
+const DASHBOARD_URL: string = `${BASE_URL}/erp/desk?module=dashboard`;
+const LOG_FOLDER_PATH: string = process.env.LOG_FOLDER_PATH ?? "./logs";
 const DATE_TIME_FORMAT: string = "YYYY-MM-DD HH:mm:ss";
 const DATE_FORMAT: string = "YYYY-MM-DD";
-const PROJECT_NAME: string | undefined = process.env.PROJECT_NAME;
-const OWNER: string | undefined = process.env.OWNER;
+const PROJECT_NAME: string = process.env.PROJECT_NAME ?? "defaultProject";
+const OWNER: string = process.env.OWNER ?? "defaultOwner";
 
 enum PriorityEnum {
 	CRITICAL = "critical",
